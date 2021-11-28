@@ -17,8 +17,6 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__. "/../../")->load();
 
 
 
-
-
 // 構成設定
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -78,7 +76,16 @@ $app->get("/ticket/{id}", function (Request $request, Response $response, array 
 
 // ユーザ一覧
 $app->get("/users", function(Request $request, Response $response, array $args) {
-  "";
+  try {
+    $sql = "SELECT * FROM users";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $users = $stmt->fetchAll();
+    $response->getBody()->write(json_encode($users));
+    return $response;
+  } catch (\Throwable $th) {
+    throw $th;
+  }
 });
 
 //単一ユーザ
