@@ -13,14 +13,14 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../../vendor/autoload.php';
 
 
+// 構成設定
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
 $config['db']['host']   = 'localhost';
-$config['db']['user']   = 'user';
+$config['db']['user']   = 'root';
 $config['db']['pass']   = 'password';
-$config['db']['dbname'] = 'exampleapp';
-
+$config['db']['dbname'] = 'test';
 
 
 $app = new \Slim\App(["settings" => $config]);
@@ -45,10 +45,15 @@ $container['logger'] = function($c) {
 // Log::debug($message);
 
 
-// pdo
+// // pdo
+$container['db'] = function ($c) {
+  $db = $c['settings']['db'];
+  $pdo = new PDO('mysql:host=' . $db['host'] . ';dbname=' . $db['dbname'],$db['user'], $db['pass']);
+  // $connection = new PDO("mysql:host=" . $c['settings']['db']['host'] . ";dbname=" . $c['settings']['db']['dbname'],)
 
-// vieq
+};
 
+// view
 
 $app->get('/', function (Request $request, Response $response, array $args) {
   $response->getBody()->write("OK");
@@ -73,6 +78,15 @@ $app->get("/ticket/{id}", function (Request $request, Response $response, array 
   return $response;
 });
 
+// ユーザ一覧
+$app->get("/users", function(Request $request, Response $response, array $args) {
+  "";
+});
+
+//単一ユーザ
+$app->get("/users/{id}", function(Request $request, Response $response, array $args){
+  "";
+});
 
 
 $app->run();
