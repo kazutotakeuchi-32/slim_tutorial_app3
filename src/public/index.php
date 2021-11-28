@@ -13,14 +13,20 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../../vendor/autoload.php';
 
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__. "/../../")->load();
+
+
+
+
+
 // 構成設定
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
-$config['db']['host']   = 'localhost';
-$config['db']['user']   = 'root';
-$config['db']['pass']   = 'password';
-$config['db']['dbname'] = 'test';
+$config['db']['host']   = $_ENV['DB_HOST'];
+$config['db']['user']   = $_ENV['DB_USERNAME'];
+$config['db']['pass']   = $_ENV['DB_PASSWORD'];
+$config['db']['dbname'] = $_ENV['DB_DATABASE'];
 
 
 $app = new \Slim\App(["settings" => $config]);
@@ -35,22 +41,14 @@ $container['logger'] = function($c) {
   $logger->pushHandler($file_handler);
   return $logger;
 };
-// Log::emergency($message);
-// Log::alert($message);
-// Log::critical($message);
-// Log::error($message);
-// Log::warning($message);
-// Log::notice($message);
-// Log::info($message);
-// Log::debug($message);
-
 
 // // pdo
 $container['db'] = function ($c) {
   $db = $c['settings']['db'];
   $pdo = new PDO('mysql:host=' . $db['host'] . ';dbname=' . $db['dbname'],$db['user'], $db['pass']);
-  // $connection = new PDO("mysql:host=" . $c['settings']['db']['host'] . ";dbname=" . $c['settings']['db']['dbname'],)
-
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+  return $pdo;
 };
 
 // view
