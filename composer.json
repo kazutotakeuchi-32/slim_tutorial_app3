@@ -16,6 +16,6 @@
         "slim/slim": "^3.0.0"
     },
     "scripts": {
-        "start": "php -S localhost:8080 -t  public/index.php"
+        "start": "php -S localhost:8080 -t  src/public/index.php"
     }
 }
