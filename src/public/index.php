@@ -8,12 +8,28 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 // @see https://github.com/slimphp/PHP-View
-use Slim\Views\PhpRenderer;
+// use Slim\Views\PhpRenderer;
 
 require '../../vendor/autoload.php';
 
 
-$app = new \Slim\App;
+$config['displayErrorDetails'] = true;
+$config['addContentLengthHeader'] = false;
+
+$config['db']['host']   = 'localhost';
+$config['db']['user']   = 'user';
+$config['db']['pass']   = 'password';
+$config['db']['dbname'] = 'exampleapp';
+
+
+
+$app = new \Slim\App(["settings" => $config]);
+
+// コンテナ
+$container = $app->getContainer();
+
+//monolog
+// pdo
 
 
 $app->get('/', function (Request $request, Response $response, array $args) {
