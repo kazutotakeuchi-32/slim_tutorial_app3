@@ -1,5 +1,5 @@
 ## Installation
-  ### git clone
+  ### インストール
   ``` bash
     git clone https://github.com/kazutotakeuchi-32/slim_tutorial_app3.git
   ```
@@ -7,6 +7,8 @@
 
   ### ローカルサーバ構築
   ```bash
+    #初回
+    composer install
     composer start
     php -S localhost:8080 -t  ./src/public
   ```
