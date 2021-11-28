@@ -13,5 +13,14 @@
     php -S localhost:8080 -t  ./src/public
   ```
 
-## 公式リファレンス
-  https://www.slimframework.com/docs/v3/tutorial/first-app.html
+## Requirement
+
+  - slim
+    - 公式リファレンス[https://www.slimframework.com/docs/v3/tutorial/first-app.html]
+    - php-view[https://github.com/slimphp/PHP-View]
+    - slim[https://github.com/slimphp/Slim]
+    
+  - http-message[https://github.com/php-fig/http-message/blob/master/docs/PSR7-Interfaces.md]
+    - ServerRequestInterface[https://www.php-fig.org/psr/psr-7/#psrhttpmessageserverrequestinterface]
+    - ResponseInterface[https://www.php-fig.org/psr/psr-7/#psrhttpmessageresponseinterface]
+
