@@ -29,12 +29,36 @@ $app = new \Slim\App(["settings" => $config]);
 $container = $app->getContainer();
 
 //monolog
+$container['logger'] = function($c) {
+  $logger = new \Monolog\Logger('my_logger');
+  $file_handler = new \Monolog\Handler\StreamHandler('../../logs/app.log');
+  $logger->pushHandler($file_handler);
+  return $logger;
+};
+// Log::emergency($message);
+// Log::alert($message);
+// Log::critical($message);
+// Log::error($message);
+// Log::warning($message);
+// Log::notice($message);
+// Log::info($message);
+// Log::debug($message);
+
+
 // pdo
+
+// vieq
 
 
 $app->get('/', function (Request $request, Response $response, array $args) {
   $response->getBody()->write("OK");
-  return $response;
+  try {
+    $this->logger->info('OK');
+    return $response;
+  } catch (\Throwable $th) {
+    $this->logger->error($th->getMessage());
+    throw $th;
+  }
 });
 
 $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
