@@ -78,10 +78,11 @@ $app->get("/ticket/{id}", function (Request $request, Response $response, array 
 $app->get("/users", function(Request $request, Response $response, array $args) {
   try {
     $sql = "SELECT * FROM users";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute();
-    $users = $stmt->fetchAll();
-    $response->getBody()->write(json_encode($users));
+    var_dump($this->db);
+    // $stmt = $this->db->prepare($sql);
+    // $stmt->execute();
+    // $users = $stmt->fetchAll();
+    // $response->getBody()->write(json_encode($users));
     return $response;
   } catch (\Throwable $th) {
     throw $th;
