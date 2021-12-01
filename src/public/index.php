@@ -156,6 +156,19 @@ $app->put("/users/{id}", function( Request $request, Response $response, array $
   }
 });
 
+// ユーザ削除
+$app->delete("/users/{id}", function(Request $request, Response $response, array $args){
+  try {
+    $id = (int)$args['id'];
+    $sql = "DELETE FROM users WHERE id = $id";
+    $res = $this->db->prepare($sql)->execute();
+    $response->getBody()->write(json_encode($res));
+    return $response;
+  }catch(\Throwable $th){
+    $this->logger->error($th->getMessage());
+    throw $th;
+  }
+});
 
 
 
