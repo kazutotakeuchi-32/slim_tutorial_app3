@@ -135,6 +135,30 @@ $app->post("/users", function(Request $request, Response $response, array $args)
   }
 });
 
+// ユーザ編集
+$app->put("/users/{id}", function( Request $request, Response $response, array $args){
+  try {
+    $id = (int)$args['id'];
+    $firstname = $request->getParsedBody()['firstname'];
+    $lastname = $request->getParsedBody()['lastname'];
+    $email = $request->getParsedBody()['email'];
+    $age = $request->getParsedBody()['age'];
+    $location = $request->getParsedBody()['location'];
+
+    $sql = "UPDATE users SET firstname = '$firstname', lastname = '$lastname', email = '$email', age = $age, location = '$location' WHERE id = $id";
+    $res = $this->db->prepare($sql)->execute();
+    $response->getBody()->write(json_encode($res));
+    return $response;
+
+  } catch (\Throwable $th) {
+    $this->logger->error($th->getMessage());
+    throw $th;
+  }
+});
+
+
+
+
 $app->run();
 
 
