@@ -25,8 +25,4 @@
     - [ResponseInterface](https://www.php-fig.org/psr/psr-7/#psrhttpmessageresponseinterface)
 
   - [monolog](https://github.com/Seldaek/monolog)
-  
-  - [pdo](https://www.php.net/manual/ja/class.pdo.php)
-    - [tutorial1](https://www.taniarascia.com/create-a-simple-database-app-connecting-to-mysql-with-php/)
-    - [tutorial2](https://www.taniarascia.com/create-a-simple-crud-database-app-php-update-delete/)
 
