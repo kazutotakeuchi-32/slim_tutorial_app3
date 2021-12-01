@@ -50,6 +50,16 @@ $container['db'] = function ($c) {
   return $pdo;
 };
 
+// $container['db'] = function ($c) {
+//   $db = $c['settings']['db'];
+//   $dsn = 'mysql:host=%s;dbname=%s;charset=utf8mb4;';
+//   $pdo = new PDO(sprintf($dsn, $db['host'], $db['dbname'],$db['user'],$db['pass']));
+//   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//   $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+//   var_dump($db);
+//   return $pdo;
+// };
+
 // view
 
 $app->get('/', function (Request $request, Response $response, array $args) {
@@ -78,24 +88,8 @@ $app->get("/ticket/{id}", function (Request $request, Response $response, array 
 // ユーザ一覧
 $app->get("/users", function(Request $request, Response $response, array $args) {
   try {
-    $container['db'] = function ($c) {
-      $db = $c['settings']['db'];
-      $dsn = 'mysql:host=%s;dbname=%s;charset=utf8mb4;';
-      $pdo = new PDO(sprintf($dsn, $db['host'], $db['dbname'],$db['user'],"yes"));
-      // $pdo= new PDO("mysql:host=localhost;charset=utf8mb4;root;j24682468");
-      // $pdo = new PDO('mysql:host=' . $db['host'] . ';dbname=' . $db['dbname'],$db['user'], $db['pass']);
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-      var_dump($db);
-      return $pdo;
-    };
-
     $sql = "SELECT * FROM users";
-    // var_dump($_ENV['DB_HOST']);
-    // var_dump($_ENV['DB_USERNAME']);
     $this->db;
-    // var_dump($db['user']);
-    // var_dump($this->db);
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
     $users = $stmt->fetchAll();
@@ -109,9 +103,37 @@ $app->get("/users", function(Request $request, Response $response, array $args) 
 
 //単一ユーザ
 $app->get("/users/{id}", function(Request $request, Response $response, array $args){
-  "";
+  try {
+    $id = (int)$args['id'];
+    $sql = "SELECT * FROM users WHERE id = {$id}";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $user = $stmt->fetch();
+    $response->getBody()->write(json_encode($user));
+    return $response;
+  }catch (\Throwable $th) {
+    $this->logger->error($th->getMessage());
+    throw $th;
+  }
 });
-
+// ユーザ追加
+$app->post("/users", function(Request $request, Response $response, array $args){
+  try {
+    $firstname = $request->getParsedBody()['firstname'];
+    $lastname = $request->getParsedBody()['lastname'];
+    $email = $request->getParsedBody()['email'];
+    $age = $request->getParsedBody()['age'];
+    $location = $request->getParsedBody()['location'];
+    var_dump($firstname, $lastname, $email, $age, $location);
+    $sql = "INSERT INTO users (firstname, lastname, email, age, location ) VALUES ( '$firstname', '$lastname', '$email', $age, '$location')";
+    $res = $this->db->prepare($sql)->execute();
+    $response->getBody()->write(json_encode($res));
+    return "";
+  } catch (\Throwable $th) {
+    $this->logger->error($th->getMessage());
+    throw $th;
+  }
+});
 
 $app->run();
 
