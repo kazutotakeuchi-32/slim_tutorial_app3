@@ -171,22 +171,58 @@ $app->delete("/users/{id}", function(Request $request, Response $response, array
 });
 
 // ユーザ検索
-$app->get("/users/search", function(Request $request, Response $response, array $args){
+// $app->get("/users/search", function(Request $request, Response $response, array $args){
+//   try {
+//     $keyword = $request.getQueryParams()['keyword'];
+//     var_dump($keyword);
+//     // $sql = "SELECT * FROM users WHERE firstname LIKE '%{$keyword}%' OR lastname LIKE '%{$keyword}%' OR email LIKE '%{$keyword}%' OR age LIKE '%{$keyword}%' OR location LIKE '%{$keyword}%'";
+//     // $stmt = $this->db->prepare($sql);
+//     // $stmt->execute();
+//     // $users = $stmt->fetchAll();
+//     // $response->getBody()->write(json_encode($users));
+//     // return $response;
+//   } catch (\Throwable $th) {
+//     $this->logger->error($th->getMessage());
+//     throw $th;
+//   }
+
+// });
+
+// 記事一覧
+$app->get( "/articles", function( Request $request, Response $response, array $args ) {
   try {
-    $keyword = $request.getQueryParams()['keyword'];
-    var_dump($keyword);
-    // $sql = "SELECT * FROM users WHERE firstname LIKE '%{$keyword}%' OR lastname LIKE '%{$keyword}%' OR email LIKE '%{$keyword}%' OR age LIKE '%{$keyword}%' OR location LIKE '%{$keyword}%'";
-    // $stmt = $this->db->prepare($sql);
-    // $stmt->execute();
-    // $users = $stmt->fetchAll();
-    // $response->getBody()->write(json_encode($users));
-    // return $response;
+    $sql = "SELECT * FROM articles" ;
+    $stmt = $this->db->prepare( $sql) ;
+    $stmt->execute();
+    $articles = $stmt->fetchAll();
+    $response->getBody()->write( json_encode( $articles ) );
+    return $response;
+
   } catch (\Throwable $th) {
     $this->logger->error($th->getMessage());
     throw $th;
   }
+} );
 
+
+
+// 記事詳細
+
+$app->get( "/articles/{id}", function( Request $request , Response $response, array $args) {
+  try {
+    $id = (int)$args['id'];
+    $sql = "SELECT * FROM articles WHERE id = $id";
+    $stmt = $this->db->prepare( $sql );
+    $stmt->execute();
+    $article = $stmt->fetch();
+    $response->getBody()->write( json_encode( $article ) );
+    return $response;
+  }catch (\Throwable $th) {
+    $this->logger->error($th->getMessage());
+    throw $th;
+  }
 });
+
 
 $app->run();
 

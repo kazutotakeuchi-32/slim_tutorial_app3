@@ -8,6 +8,8 @@ use test;
 -- user_id BIGINT(11)  NOT NULL,
 -- FOREIGN KEY(user_id) REFERENCES users(id),
 
+-- articlesテーブル(記事)
+
 CREATE TABLE articles (
   id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(120) NOT NULL,

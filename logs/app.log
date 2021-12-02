@@ -206,3 +206,5 @@
 [2021-12-01T14:11:59.092465+00:00] my_logger.ERROR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@nnn.com, 10, japan)' at line 1 [] []
 [2021-12-01T14:12:49.574928+00:00] my_logger.ERROR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@nnn.com, '10', 'japan')' at line 1 [] []
 [2021-12-01T14:12:50.646996+00:00] my_logger.ERROR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@nnn.com, '10', 'japan')' at line 1 [] []
+[2021-12-02T14:07:17.169091+00:00] my_logger.INFO: OK [] []
+[2021-12-02T14:26:04.507839+00:00] my_logger.INFO: OK [] []
