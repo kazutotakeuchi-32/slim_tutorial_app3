@@ -11,4 +11,6 @@ CREATE DATABASE test;
     location VARCHAR(50),
     date TIMESTAMP
   );
+
+  
   
