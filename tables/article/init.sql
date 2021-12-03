@@ -24,6 +24,7 @@ CREATE TABLE articles (
 );
 
 
+
 -- CREATE TABLE articles (
 --   id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 --   title VARCHAR(120) NOT NULL,
