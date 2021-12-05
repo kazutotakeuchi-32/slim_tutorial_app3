@@ -106,11 +106,10 @@ $app->get("/api/v1/users", function(Request $request, Response $response, array 
 
 
 // 単一ユーザ
-
 $app->get("/api/v1/users/{id}", function(Request $request, Response $response, array $args){
   try {
     $id = (int)$args['id'];
-    $sql = "SELECT * FROM users WHERE id = {$id}";
+    $sql = "SELECT * FROM users JOIN articles ON users.id = articles.user_id WHERE users.id = {$id} ";
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
     $user = $stmt->fetch();
@@ -288,9 +287,6 @@ $app->get("/users/{id}/edit", function(Request $request, Response $response, arr
     throw $th;
   }
 });
-
-
-
 
 
 

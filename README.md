@@ -13,6 +13,22 @@
     php -S localhost:8080 -t  ./src/public
   ```
 
+ ### デバック
+ ```bash
+  # GET
+  curl http://localhost:8000/api/v1/users
+
+  # POST
+  curl -X POST -d "firstname=kazuto&lastname=takeuchi&age=22&email=tes@test.com&location=JP"  http://localhost:8000/
+  users
+
+  # PUT
+  curl -X PUT -d "firstname=kazu&lastname=satou&age=10&email=tes@test10.com&location=E"  http://localhost:8000/users/:id
+
+  # DELETE 
+  curl -X DELETE  http://localhost:8000/:id
+ ```
+
 ## Requirement
 
   - slim
