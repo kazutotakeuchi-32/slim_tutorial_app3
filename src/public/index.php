@@ -50,6 +50,8 @@ $container['db'] = function ($c) {
   return $pdo;
 };
 
+$container['view'] = new \Slim\Views\PhpRenderer('../../views/');
+
 // $container['db'] = function ($c) {
 //   $db = $c['settings']['db'];
 //   $dsn = 'mysql:host=%s;dbname=%s;charset=utf8mb4;';
@@ -86,20 +88,20 @@ $app->get("/ticket/{id}", function (Request $request, Response $response, array 
 });
 
 // ユーザ一覧
-$app->get("/users", function(Request $request, Response $response, array $args) {
-  try {
-    $sql = "SELECT * FROM users";
-    $this->db;
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute();
-    $users = $stmt->fetchAll();
-    $response->getBody()->write(json_encode($users));
-    return $response;
-  } catch (\Throwable $th) {
-    $this->logger->error($th->getMessage());
-    throw $th;
-  }
-});
+// $app->get("/users", function(Request $request, Response $response, array $args) {
+//   try {
+//     $sql = "SELECT * FROM users";
+//     $this->db;
+//     $stmt = $this->db->prepare($sql);
+//     $stmt->execute();
+//     $users = $stmt->fetchAll();
+//     $response->getBody()->write(json_encode($users));
+//     return $response;
+//   } catch (\Throwable $th) {
+//     $this->logger->error($th->getMessage());
+//     throw $th;
+//   }
+// });
 
 //単一ユーザ
 $app->get("/users/{id}", function(Request $request, Response $response, array $args){
@@ -219,6 +221,22 @@ $app->get( "/articles/{id}", function( Request $request , Response $response, ar
     return $response;
   }catch (\Throwable $th) {
     $this->logger->error($th->getMessage());
+    throw $th;
+  }
+});
+
+$app->get("/users", function(Request $request, Response $response, array $args){
+  try {
+    $sql = "SELECT * FROM users";
+    $this->db;
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $users = $stmt->fetchAll();
+    // $response->getBody()->write(json_encode($users));
+    $response = $this->view->render($response, 'users/index.phtml', ['users' => $users]);
+    // $response = $this->view->render($response, '_index.phtml');
+    return $response;
+  } catch (\Throwable $th) {
     throw $th;
   }
 });

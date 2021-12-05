@@ -208,3 +208,6 @@
 [2021-12-01T14:12:50.646996+00:00] my_logger.ERROR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@nnn.com, '10', 'japan')' at line 1 [] []
 [2021-12-02T14:07:17.169091+00:00] my_logger.INFO: OK [] []
 [2021-12-02T14:26:04.507839+00:00] my_logger.INFO: OK [] []
+[2021-12-05T10:22:06.389637+00:00] my_logger.INFO: OK [] []
+[2021-12-05T10:22:10.407098+00:00] my_logger.ERROR: SQLSTATE[HY000] [2002] No such file or directory [] []
+[2021-12-05T10:38:49.013775+00:00] my_logger.INFO: OK [] []

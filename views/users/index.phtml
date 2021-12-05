@@ -1,0 +1,21 @@
+<div class="">
+  _index.php
+  <?php foreach ($users as $key => $user) : ?>
+    <div>
+      --------------------------------------------------
+      <p>
+        <?php echo "id: {$user['id']}" ; ?>
+      </p>
+      <p>
+        <?php echo "lastname: {$user['firstname']}"; ?>
+      </p>
+      <p>
+        <?php echo "age: {$user['age']}"; ?>
+      </p>
+      <p>
+        <?php echo "email: {$user['email']}"; ?>
+      </p>
+      <a href=<?php echo "/users/{$user['id']}" ;?> > 詳細ページ</a>
+  </div>
+ <?php endforeach; ?>
+</div>
