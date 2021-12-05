@@ -1,5 +1,5 @@
 <div class="">
-  _index.php
+  <h1>ユーザ一覧</h1>
   <?php foreach ($users as $key => $user) : ?>
     <div>
       --------------------------------------------------
@@ -7,7 +7,10 @@
         <?php echo "id: {$user['id']}" ; ?>
       </p>
       <p>
-        <?php echo "lastname: {$user['firstname']}"; ?>
+        <?php echo "firstname: {$user['firstname']}"; ?>
+      </p>
+      <p>
+        <?php echo "lastname: {$user['lastname']}"; ?>
       </p>
       <p>
         <?php echo "age: {$user['age']}"; ?>
@@ -16,6 +19,14 @@
         <?php echo "email: {$user['email']}"; ?>
       </p>
       <a href=<?php echo "/users/{$user['id']}" ;?> > 詳細ページ</a>
+      <a href=<?php echo "/users/{$user['id']}/edit" ;?> >編集ページ</a>
+      <form action=<?php echo "/users/{$user['id']}"  ;?> method="post">
+        <input type="hidden" name="_METHOD" value="DELETE"/>
+        <input type="submit" value="削除"/>
+      </form>
   </div>
+
  <?php endforeach; ?>
+ --------------------------------------------------
 </div>
+<a href="/users/new">ユーザ追加</a>

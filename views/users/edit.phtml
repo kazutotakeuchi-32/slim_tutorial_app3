@@ -1,0 +1,27 @@
+
+<form action=<?php echo "/users/{$user['id']}" ;?> method="post">
+ 
+  <div class="">
+    <label for="">firstname</label>
+    <input type="text" name="firstname" value=<?php echo $user['firstname'];?>  placeholder="firstname を入力">
+  </div>
+  <div class="">
+    <label for="">lastname</label>
+    <input type="text" name="lastname" value=<?php echo $user['lastname'];?> placeholder="lastname を入力">
+  </div>
+  <div class="">
+    <label for="">email</label>
+    <input type="text" name="email" value=<?php echo $user['email'];?> placeholder="email を入力">
+  </div>
+  <div class="">
+    <label for="">age</label>
+    <input type="age" name="age" value=<?php echo $user['age'];?> placeholder="age を入力">
+  </div>
+
+  <div class="">
+    <label for="">location</label>
+    <input type="location" name="location" value=<?php echo $user['location'];?> placeholder="location を入力">
+  </div>
+  <input type="hidden" name="_METHOD" value="PUT"/>
+  <input type="submit" method_exists value="送信">
+</form>
