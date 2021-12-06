@@ -16,14 +16,17 @@
  ### デバック
  ```bash
   # GET
-  curl http://localhost:8000/api/v1/users
+  curl http://localhost:8080/api/v1/users
 
   # POST
-  curl -X POST -d "firstname=kazuto&lastname=takeuchi&age=22&email=tes@test.com&location=JP"  http://localhost:8000/
-  users
+  curl -X POST \
+  -d "firstname=kazuto&lastname=takeuchi&age=22&email=tes@test.com&location=JP" \  
+  http://localhost:8080/users
 
   # PUT
-  curl -X PUT -d "firstname=kazu&lastname=satou&age=10&email=tes@test10.com&location=E"  http://localhost:8000/users/:id
+  curl -X PUT  \
+  -d "firstname=kazu&lastname=satou&age=10&email=tes@test10.com&location=E" \ 
+  http://localhost:8080/users/:id
 
   # DELETE 
   curl -X DELETE  http://localhost:8000/:id
